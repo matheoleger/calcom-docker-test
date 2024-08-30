@@ -82,7 +82,7 @@ jobs:
           IFS=',' read -ra ADDR <<< "$tags"  # Convert string to array using ',' as delimiter
           tag=${ADDR[0]}  # Get the first tag
 
-          docker run --rm --network stack \
+          docker run --rm \
             -p 3000:3000 \
             -e DATABASE_URL=postgresql://postgres:postgres@database:5432/calendso \
             -e DATABASE_DIRECT_URL=postgresql://postgres:postgres@database:5432/calendso \
