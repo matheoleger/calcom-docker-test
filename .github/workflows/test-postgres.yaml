@@ -70,7 +70,7 @@ jobs:
       - name: Test runtime
         run: |
           docker run --rm \
-            --network bridge \
+            --network host \
             -p 3000:3000 \
             -e DATABASE_URL=postgresql://postgres:postgres@postgres:5432/calendso \
             -e DATABASE_DIRECT_URL=postgresql://postgres:postgres@postgres:5432/calendso \
