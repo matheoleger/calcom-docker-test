@@ -69,7 +69,10 @@ jobs:
       
       - name: Test runtime
         run: |
+          NETWORK=${docker network ls --filter name=github_network}
+
           docker run --rm \
+            --network $NETWORK \
             -p 3000:3000 \
             -e DATABASE_URL=postgresql://postgres:postgres@postgres:5432/calendso \
             -e DATABASE_DIRECT_URL=postgresql://postgres:postgres@postgres:5432/calendso \
