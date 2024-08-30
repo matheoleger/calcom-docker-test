@@ -61,11 +61,11 @@ jobs:
 
       - name: test postgres
         run: |
-        docker ps | grep postgres
+          docker ps | grep postgres
 
       - name: test network
         run: |
-        docker network ls
+          docker network ls
       
       - name: Test runtime
         run: |
