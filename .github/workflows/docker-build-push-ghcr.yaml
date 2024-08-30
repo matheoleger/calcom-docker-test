@@ -57,7 +57,8 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          image: ghcr.io/calcom/cal.com
+          image: |
+            ghcr.io/calcom/cal.com
 
       - name: Build image
         id: docker_build
