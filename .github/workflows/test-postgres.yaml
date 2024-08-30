@@ -20,8 +20,6 @@ jobs:
     services:
       postgres:
         image: postgres
-        networks:
-          - test-pg
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
@@ -72,7 +70,7 @@ jobs:
       - name: Test runtime
         run: |
           docker run --rm \
-            --network test-pg \
+            --network bridge \
             -p 3000:3000 \
             -e DATABASE_URL=postgresql://postgres:postgres@postgres:5432/calendso \
             -e DATABASE_DIRECT_URL=postgresql://postgres:postgres@postgres:5432/calendso \
