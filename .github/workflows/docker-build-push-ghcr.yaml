@@ -82,10 +82,13 @@ jobs:
           IFS=',' read -ra ADDR <<< "$tags"  # Convert string to array using ',' as delimiter
           tag=${ADDR[0]}  # Get the first tag
 
+          NETWORK=$(docker network ls --format {{.Name}} --filter name=github_network)
+
           docker run --rm \
+            --network $NETWORK \
             -p 3000:3000 \
-            -e DATABASE_URL=postgresql://postgres:postgres@localhost:5432/calendso \
-            -e DATABASE_DIRECT_URL=postgresql://postgres:postgres@localhost:5432/calendso \
+            -e DATABASE_URL=postgresql://postgres:postgres@postgres:5432/calendso \
+            -e DATABASE_DIRECT_URL=postgresql://postgres:postgres@postgres:5432/calendso \
             -e NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} \
             -e CALENDSO_ENCRYPTION_KEY=${{ secrets.CALENDSO_ENCRYPTION_KEY }} \
             $tag &
