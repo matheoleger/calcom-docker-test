@@ -87,6 +87,8 @@ jobs:
           docker run --rm \
             --network $NETWORK \
             -p 3004:3004 \
+            -e NEXT_PUBLIC_WEBAPP_URL=${{ secrets.NEXT_PUBLIC_WEBAPP_URL }}
+            -e NEXT_PUBLIC_API_V2_URL=${{ secrets.NEXT_PUBLIC_API_V2_URL }} 
             -e DATABASE_URL=postgresql://postgres:postgres@postgres:5432/calendso \
             -e DATABASE_DIRECT_URL=postgresql://postgres:postgres@postgres:5432/calendso \
             -e NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} \
