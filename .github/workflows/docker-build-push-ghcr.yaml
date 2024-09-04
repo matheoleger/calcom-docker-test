@@ -86,8 +86,8 @@ jobs:
 
           docker run --rm \
             --network $NETWORK \
-            -p 3004:3000 \
-            -e NEXT_PUBLIC_WEBAPP_URL=${{ secrets.NEXT_PUBLIC_WEBAPP_URL }} \
+            -p 3000:3000 \
+            -e NEXT_PUBLIC_WEBAPP_URL=localhost:3000 \
             -e NEXT_PUBLIC_API_V2_URL=${{ secrets.NEXT_PUBLIC_API_V2_URL }} \
             -e DATABASE_URL=postgresql://postgres:postgres@postgres:5432/calendso \
             -e DATABASE_DIRECT_URL=postgresql://postgres:postgres@postgres:5432/calendso \
@@ -101,11 +101,11 @@ jobs:
             echo "Waiting for the server to start..."
             sleep 120
 
-            echo ${{ secrets.NEXT_PUBLIC_WEBAPP_URL }}/auth/login
+            echo localhost:3000/auth/login
 
             for i in {1..60}; do
               echo "Checking server health ($i/60)..."
-              response=$(curl -o /dev/null -s -w "%{http_code}" ${{ secrets.NEXT_PUBLIC_WEBAPP_URL }}/auth/login)
+              response=$(curl -o /dev/null -s -w "%{http_code}" localhost:3000/auth/login)
               echo "HTTP Status Code: $response"
               if [[ "$response" == "200" ]] || [[ "$response" == "307" ]]; then
                 echo "Server is healthy"
